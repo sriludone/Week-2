@@ -11,7 +11,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build Docker image using Dockerfile
                     dockerImage = docker.build("myapp-image")
                 }
             }
@@ -20,16 +19,14 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Run the image
-                    dockerImage.run()
+                    bat "docker run --rm myapp-image"
                 }
             }
         }
 
         stage('Cleanup') {
             steps {
-                // Optional: remove all stopped containers
-                sh 'docker container prune -f'
+                bat 'docker container prune -f'
             }
         }
     }
