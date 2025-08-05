@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/your-user/your-repo.git'
+                git 'https://github.com/sriludone/Week-2.git'
             }
         }
 
