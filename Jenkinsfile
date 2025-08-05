@@ -19,7 +19,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker rm -f registration-container || true'
+                    bat 'docker rm -f registration-container || exit 0'
                     dockerImage.run('-d -p 5000:5000 --name registration-container')
                 }
             }
