@@ -1,5 +1,11 @@
-# official Ubuntu base image
-FROM ubuntu
+FROM python:3.8-slim
 
-# runs when container starts
-CMD ["echo", "Docker is working inside Jenkins!"]
+WORKDIR /app
+
+COPY . .
+
+RUN pip install -r requirements.txt
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]
