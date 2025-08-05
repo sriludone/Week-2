@@ -4,25 +4,20 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/sriludone/Week-2.git'
-
+                git url: 'https://github.com/sriludone/Week-2.git', branch: 'main'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    dockerImage = docker.build("registration:v1")
-                }
+                bat 'docker build -t registration:v1 .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                script {
-                    bat 'docker rm -f registration-container || exit 0'
-                    dockerImage.run('-d -p 5000:5000 --name registration-container')
-                }
+                bat 'docker rm -f registration-container || exit 0'
+                bat 'docker run -d -p 5000:5000 --name registration-container registration:v1'
             }
         }
     }
