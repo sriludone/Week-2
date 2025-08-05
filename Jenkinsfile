@@ -1,19 +1,33 @@
 pipeline {
     agent any
+
     stages {
-        stage('Build') {
+        stage('Clone Repo') {
             steps {
-                echo 'Building the application...'
+                git 'https://github.com/your-user/your-repo.git'
             }
         }
-        stage('Test') {
+
+        stage('Build Docker Image') {
             steps {
-                echo 'Running tests...'
+                script {
+                    dockerImage = docker.build("myapp-image")
+                }
             }
         }
-        stage('Deploy') {
+
+        stage('Run Docker Container') {
             steps {
-                echo 'Deploying to environment...'
+                script {
+                    dockerImage.run()
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                sh 'docker ps -a'
+                sh 'docker rm $(docker ps -aq) || true'
             }
         }
     }
