@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/sriludone/Week-2.git'
+                git branch: 'main', url: 'https://github.com/sriludone/Week-2.git'
+
             }
         }
 
