@@ -3,10 +3,11 @@ pipeline {
 
     stages {
         stage('Clone Repo') {
-            steps {
-                git 'https://github.com/sriludone/Week-2.git'
-            }
-        }
+    steps {
+        git branch: 'main', url: 'https://github.com/sriludone/Week-2.git'
+    }
+}
+
 
         stage('Build Docker Image') {
             steps {
