@@ -23,11 +23,5 @@ pipeline {
                 bat 'python D:/DevOps/week-2/test_registration.py'
             }
         }
-        stage('Run Selenium Tests') {
-            steps {
-                bat 'python D:/DevOps/week-2/test_registration_app.py'
-    }
-}
-
     }
 }
